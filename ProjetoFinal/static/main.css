@@ -1,0 +1,15 @@
+.titulo{
+}
+
+body {
+    background: #f3f3f3 !important;
+}
+
+.background-cinza{
+    background-color: #a3a3a3 !important;
+}
+
+.fonteCarrinho{
+    font-size: 20px;
+    padding-right:1rem
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/d0e6d8f241.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Fornecedor - Albus IT Supplies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar background-cinza" >
+        <div class="container-fluid">
+            <a style="gap: 0.75rem" class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{{url_for('static', filename='logo1.jpg')}}" alt="" width="50" height="50" class="d-inline-block align-text-top">
+                <span>
+                    Albus IT Supplies
+                </span>
+                <a style="float:right" class="btn btn-secondary" href="/logout">Logout</a>
+            </a>
+        </div>
+    </nav>
+    <table class="table table-striped" style="margin-top: 1rem">
+        <tr style="background-color: #cbcbcb !important">
+            <th>Fornecedora</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+            <th>NIF</th>
+        </tr>
+        {% for dado in listaDados %}
+        <tr>
+            <td>{{dado['nome']}}</td>
+            <td>{{dado['telefone']}}</td>
+            <td>{{dado['endereco']}}</td>
+            <td>{{dado['NIF']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table class="table table-striped" style="margin-top: 1rem">
+        <tr style="background-color: #cbcbcb !important">
+            <th></th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Referência</th>
+            <th>Preço Fornecedor</th>
+            <th>Porcentagem</th>
+            <th>IVA</th>
+        </tr>
+        {% for dado in listaProdutosFornecedor %}
+        <tr>
+            <td><img src="{{url_for('static', filename=dado['imagem'])}}" align="middle"  alt="Logo" width="100" height="100"></td>
+            <td>{{dado['nome']}}</td>
+            <td>{{dado['descricao']}}</td>
+            <td>{{dado['referencia']}}</td>
+            <td>{{dado['preco_fornecedor']}}</td>
+            <td>{{dado['porcentagem']}}</td>
+            <td>{{dado['iva']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div style="text-align:center;margin-top:5rem">
+        <h3>Venda Por Produto</h3>
+        <object style="width: 1000px;" type="image/svg+xml" data="{{url_for('static', filename='fornecedor_venda_produto.svg')}}">
+            Your browser does not support SVG
+        </object>
+    </div>
+    <div style="text-align:center;margin-top:5rem">
+        <h3>Preço Total Por Produto</h3>
+        <object style="width: 1000px;" type="image/svg+xml" data="{{url_for('static', filename='fornecedor_venda_produto2.svg')}}">
+            Your browser does not support SVG
+        </object>
+    </div>
+</body>
+</html>

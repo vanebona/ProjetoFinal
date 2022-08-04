@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://kit.fontawesome.com/d0e6d8f241.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>Cliente - Albus IT Supplies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/fontawesome.min.css" integrity="sha384-zIaWifL2YFF1qaDiAo0JFgsmasocJ/rqu7LKYH8CoBEXqGbb9eO+Xi3s6fQhgFWM" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="navbar background-cinza" >
+        <div class="container-fluid">
+            <a style="gap: 0.75rem" class="navbar-brand d-flex align-items-center" href="#">
+                <img src="{{url_for('static', filename='logo1.jpg')}}" alt="" width="50" height="50" class="d-inline-block align-text-top">
+                <span>
+                    Albus IT Supplies
+                </span>
+                <a style="float:right" class="btn btn-secondary" href="/logout">Logout</a>
+            </a>
+        </div>
+    </nav>
+    <table class="table table-striped" style="margin-top: 1rem">
+        <tr style="background-color: #cbcbcb !important">
+            <th></th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Referência</th>
+            <th>Cor</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th></th>
+        </tr>
+        {% for produto in listaProdutos %}
+        <form action="{{ url_for('adicionar_carrinho', referencia=produto['referencia'], email=email) }}" method="post">
+            <tr>
+                <td><img src="{{url_for('static', filename=produto['imagem'])}}" align="middle"  alt="Logo" width="100" height="100"></td>
+                <td>{{produto['nome']}}</td>
+                <td>{{produto['descricao']}}</td>
+                <td>{{produto['referencia']}}</td>
+                <td>
+                    <select name="cor">
+                        {% for cor in produto['cor'] %}
+                        <option value="{{cor}}">{{cor}}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <input type="number" class="form-control" name="quant">
+                </td>
+                <td>€{{produto['preco']}}</td>
+                <td>
+                    <button type="submit" class="btn btn-secondary">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </td>
+            </tr>
+        </form>
+        {% endfor %}
+    </table>
+    <div>
+        <form action="{{ url_for('carrinho', email=email) }}" method="post">
+            <button type="submit" class="btn btn-secondary" style="float: right;">
+                Ver Carrinho
+            </button>
+        </form>
+    </div>
+    <div style="text-align:center;margin-top:5rem">
+        <h3>Total Venda</h3>
+        <object style="width: 1000px;" type="image/svg+xml" data="{{url_for('static', filename='cliente_quantidade_venda.svg')}}">
+            Your browser does not support SVG
+        </object>
+    </div>
+</body>
+</html>
